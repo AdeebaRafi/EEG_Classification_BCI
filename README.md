@@ -115,8 +115,8 @@ Human–Computer Interaction: Controlling devices without physical movement.
 
 Clone this repository:
 
-git clone (https://github.com/AdeebaRafi/BCI_Competition_IV)
-cd BCI_Competition_IV
+git clone ((https://github.com/AdeebaRafi/EEG_Classification_BCI))
+cd EEG_Classification_BCI
 
 
 ## Install dependencies:
