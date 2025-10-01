@@ -105,7 +105,7 @@ Assistive technology: Brain-controlled wheelchairs or prosthetics.
 
 Medical diagnosis: Seizures, sleep disorders, Alzheimer’s detection.
 
-Mental health: Neurofeedback for stress, ADHD, focus.
+Mental health: Neurofeedback for stress, ADHD, and focus.
 
 Gaming and VR: Brain-controlled games.
 
@@ -134,3 +134,4 @@ Evaluate the model and view results.
 
 This project shows how deep learning and EEG data can be combined to classify imagined movements.
 The results highlight the potential of brain-computer interfaces for real-world applications in healthcare, accessibility, and human–machine interaction.
+
