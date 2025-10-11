@@ -3,6 +3,8 @@
 
 EEG Motor Imagery Classification Using Deep Learning.
 
+" Training a model means feeding it data and adjusting its internal parameters so it learns patterns. First, I collect and preprocess data. Then choose a model, define a loss function to measure errors, and use an optimizer (like Adam, gradient descent) to update weights. The process repeats until the model’s predictions become accurate enough."
+
 ( */ For Personal Understanding
 # Brain Signal Decoding
   "Brain signal decoding is about mapping EEG signals to meaningful patterns using machine learning, which is the core idea of brain-computer interface systems."
