@@ -2,7 +2,7 @@
 
 EEG Motor Imagery Classification Using Deep Learning.
 The focus of this work is on Brain-Computer Interfaces, where I try to decode brain signals into meaningful actions.
-Specifically, I built a model that can classify EEG signals recorded when a person imagines different movements — like left or right hand, feet, or tongue.
+Specifically, I built a model that can classify EEG signals recorded when a person imagines different movements like left or right hand, feet, or tongue.
 The main goal is to explore how EEG, which records electrical activity from the brain, can be used for movement prediction in applications such as neurorehabilitation and assistive technology.
 
 (Neurorehabilitation is a medical treatment that helps people recover after a brain injury or nervous system disease by improving their physical, cognitive, and emotional functions)
@@ -98,5 +98,23 @@ Now, if we look at the convergence metrics:
 •	Early stopping helped me stop training at the best point, so I avoided overfitting.
 Finally, the learning curves showed healthy training: the model reached high accuracy quickly, the training and validation curves stayed close to each other, and techniques like dropout, L2 regularization, and label smoothing kept the model stable
 
+# Model Evaluation & Insights
+In model evaluation. The confusion matrix tells us how well the model distinguished between the classes. For example, right hand movements were classified with very high accuracy — 99% recall  while tongue movement was a bit more challenging at 93%. Still, confusion between classes was minimal, so the model separated them well.
+In terms of feature importance, the GRU layers helped capture the temporal sequence in the EEG, the CNN extracted spatial features across channels, and FFT added frequency information. Together, these gave a richer understanding of the signals.
+Finally, in real-world terms, this means the model can reliably detect motor imagery, which is promising for clinical use and brain-computer interfaces. Also, it adapts to different brain patterns, which is important since every person’s signals are slightly unique.
 
+
+•	A CNN finds patterns across the EEG channels. It tells us which scalp areas are active.
+•	An RNN reads the signal in time and remembers past events. It helps the model follow how the signal changes.
+•	Spatial features are about where on the head the activity is. Temporal features are about how the activity changes over time.
+•	Together, they let the model detect both where and when important brain signals happen.
+
+# Visualization & Interpretability 
+On this slide, I’m showing how I visualized the EEG data and interpreted the model.
+First, I looked at the raw EEG signals — this is the original brain activity. Then I normalized them so channels are comparable. I also transformed the signals into frequency spectra to see dominant brain waves.
+Next, I applied advanced analytics. Band power analysis told me how much theta, alpha, and beta activity was present, which relates to different mental states. PCA(Principal Component Analysis) helped me reduce the complex data into 2 dimensions, so I could visualize how well the classes separate. Heatmaps showed me when and where brain activity was strongest across the scalp.
+For interpretability, I used attention mechanisms, which let the model highlight the most important time segments. Feature importance showed which frequency bands were critical. Finally, decision boundaries made it clear that the model could separate different tasks reliably.
+  
+PCA (Principal Component Analysis): Helps us see how well the classes (e.g., right hand vs tongue movement) separate in feature space.
+  
 
