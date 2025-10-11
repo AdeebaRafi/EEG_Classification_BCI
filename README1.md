@@ -76,16 +76,16 @@ This avoids bias in training.
 
 # Signal Processing
 
-EEG is a continuous-time signal, so I cut it into smaller chunks using a sliding window. Each window had 50 timepoints, and I moved the window forward 10 points at a time. 
+• EEG is a continuous-time signal, so I cut it into smaller chunks using a sliding window. Each window had 50 timepoints, and I moved the window forward 10 points at a time. 
 This way, I could capture overlapping temporal information instead of looking at one long signal.
 
 # Model Architecture & Selection 
-For this project, I used a hybrid model that combines CNN and BiLSTM. The reason is that EEG signals have two important parts:
+• For this project, I used a hybrid model that combines CNN and BiLSTM. The reason is that EEG signals have two important parts:
 •	The spatial patterns, meaning how signals differ across electrodes on the scalp.
 •	The temporal patterns, meaning how the signals change over time.
 
 CNN is very good at extracting spatial features across channels, while BiLSTM is designed to capture time sequences. By combining both, the model can learn from both perspectives, making it more powerful.
-I also added regularization methods — L2 and dropout — to avoid overfitting. Without this, the model might memorize the training data instead of learning general patterns.
+I also added regularization methods, L2 and dropout, to avoid overfitting. Without this, the model might memorize the training data instead of learning general patterns.
 
 Specifically, L2 regularization works by slightly punishing the model if any weight becomes too large. It keeps the weights small and balanced, so the model doesn’t depend too much on a few features. This helps it generalize better.
 Finally, I used bidirectional LSTM, which looks not only at past signals but also at future context in the sequence. This is especially useful for EEG because brain signals are continuous, and understanding both directions gives a fuller picture.
@@ -96,12 +96,12 @@ Finally, I used bidirectional LSTM, which looks not only at past signals but als
 I used a hybrid model that combines CNN and BiLSTM. CNN looks at the spatial features across EEG channels, and BiLSTM focuses on the time sequence of the signals.
 
 •	Why hybrid?
-EEG signals have two important parts — the patterns across channels (spatial) and how the signal changes over time (temporal). CNN is good for spatial, BiLSTM is good for temporal, so combining both makes the model stronger.
+EEG signals have two important parts, the patterns across channels (spatial) and how the signal changes over time (temporal). CNN is good for spatial, BiLSTM is good for temporal, so combining both makes the model stronger.
 •	Regularization (L2 + dropout):
 To avoid overfitting, I added L2 and dropout. These methods stop the model from memorizing the training data and help it perform well on new data.
 
 # Bidirectional processing (BiLSTM):
-Normally, models only look at past data to predict the next step. BiLSTM looks at both past and future context in the signal, which helps capture more information from EEG.
+• Normally, models only look at past data to predict the next step. BiLSTM looks at both past and future context in the signal, which helps capture more information from EEG.
 
 # What is L2 Regularization?
 
@@ -114,7 +114,7 @@ Normally, models only look at past data to predict the next step. BiLSTM looks a
 
 # Training Strategy & Optimization 
 
-For training, I used the Adam optimizer with a learning rate of 0.0005.
+• For training, I used the Adam optimizer with a learning rate of 0.0005.
 Adam updates weights step by step, and this small learning rate keeps learning stable.
 The loss function is categorical crossentropy with label smoothing. This is suitable for multi-class problems, and label smoothing helps the model generalize instead of being overconfident.
 I trained with a batch size of 32, meaning the model learns from 32 samples at a time instead of the full dataset.
@@ -124,16 +124,17 @@ Finally, I used a validation split of 20%, so the model is always tested on unse
 
 •	Optimizer: Adam with learning rate 0.0005
 o	Adam is a popular algorithm that tells the model how to update weights to get better each step. Think of it like a smart teacher adjusting your learning speed.
-o	Learning rate (0.0005) controls how big each adjustment step is.
-	If it’s too big → the model may jump around and never learn.
-	If it’s too small → the model learns very slowly.
-	Here, 0.0005 is a gentle step size — stable, not too aggressive.
+
+.	Learning rate (0.0005) controls how big each adjustment step is.
+- >	If it’s too big → the model may jump around and never learn.
+- >	If it’s too small → the model learns very slowly.
+- >	Here, 0.0005 is a gentle step size, stable, not too aggressive.
 
 •	Loss Function: Categorical Crossentropy with label smoothing
 o	Categorical Crossentropy is used when we classify data into more than 2 categories (like left hand, right hand, etc.).
 o	It measures how far off the model’s predictions are from the true labels.
 o	Label smoothing means: instead of telling the model “the correct answer is 100% class A, 0% others,” we say “it’s 90% class A, 10% others.”
-	This avoids the model becoming too confident and helps generalize better.
+- >	This avoids the model becoming too confident and helps generalize better.
 
 # 	Batch Size: 32 samples
 
@@ -146,10 +147,10 @@ o	This helps see if the model works on data it hasn’t seen.
 
 # Training Progress & Convergence 
 
-Here I am showing how the model learned over time.
+• Here I am showing how the model learned over time.
 In the first 10 epochs(ee-poks), the accuracy went from chance level, about 34%, all the way up to around 90%. This was the fast learning stage where the model quickly picked up the main patterns in the EEG data.
 Between epochs 11 and 25, the model already understood the basics, so the improvements slowed down. This stage was more about refining and stabilizing the predictions.
-After epoch 26, the model was already very good, so I reduced the learning rate. At this point, it was making small, careful improvements — more like fine-tuning and polishing.
+After epoch 26, the model was already very good, so I reduced the learning rate. At this point, it was making small, careful improvements, more like fine-tuning and polishing.
 Now, if we look at the convergence metrics:
 •	The final training accuracy was 99.8%, which means the model almost perfectly fit the training data.
 •	The validation accuracy was 96.9%, which is also very high. This shows that the model generalizes well to unseen data and did not just memorize the training set.
@@ -158,7 +159,7 @@ Finally, the learning curves showed healthy training: the model reached high acc
 
 # Model Evaluation & Insights
 
-In model evaluation. The confusion matrix tells us how well the model distinguished between the classes. For example, right hand movements were classified with very high accuracy — 99% recall  while tongue movement was a bit more challenging at 93%. Still, confusion between classes was minimal, so the model separated them well.
+• In model evaluation. The confusion matrix tells us how well the model distinguished between the classes. For example, right hand movements were classified with very high accuracy, 99% recall  while tongue movement was a bit more challenging at 93%. Still, confusion between classes was minimal, so the model separated them well.
 In terms of feature importance, the GRU layers helped capture the temporal sequence in the EEG, the CNN extracted spatial features across channels, and FFT added frequency information. Together, these gave a richer understanding of the signals.
 Finally, in real-world terms, this means the model can reliably detect motor imagery, which is promising for clinical use and brain-computer interfaces. Also, it adapts to different brain patterns, which is important since every person’s signals are slightly unique.
 
@@ -170,8 +171,8 @@ Finally, in real-world terms, this means the model can reliably detect motor ima
 
 # Visualization & Interpretability 
 
-On this slide, I’m showing how I visualized the EEG data and interpreted the model.
-First, I looked at the raw EEG signals — this is the original brain activity. Then I normalized them so channels are comparable. I also transformed the signals into frequency spectra to see dominant brain waves.
+• On this slide, I’m showing how I visualized the EEG data and interpreted the model.
+First, I looked at the raw EEG signals, this is the original brain activity. Then I normalized them so channels are comparable. I also transformed the signals into frequency spectra to see dominant brain waves.
 Next, I applied advanced analytics. Band power analysis told me how much theta, alpha, and beta activity was present, which relates to different mental states. PCA(Principal Component Analysis) helped me reduce the complex data into 2 dimensions, so I could visualize how well the classes separate. Heatmaps showed me when and where brain activity was strongest across the scalp.
 For interpretability, I used attention mechanisms, which let the model highlight the most important time segments. Feature importance showed which frequency bands were critical. Finally, decision boundaries made it clear that the model could separate different tasks reliably.
   
