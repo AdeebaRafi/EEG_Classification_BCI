@@ -31,7 +31,7 @@ This avoids bias in training.
 
 # Signal Processing
 EEG is a continuous time signal, so I cut it into smaller chunks using a sliding window. Each window had 50 timepoints, and I moved the window forward 10 points at a time. 
-This way, I could capture overlapping temporal information instead of looking at one long signal.<img width="468" height="41" alt="image" src="https://github.com/user-attachments/assets/525953bc-6186-416d-8ad3-d40cca208afe" />
+This way, I could capture overlapping temporal information instead of looking at one long signal.
 
 # Model Architecture & Selection 
 For this project, I used a hybrid model that combines CNN and BiLSTM. The reason is that EEG signals have two important parts:
@@ -117,4 +117,8 @@ For interpretability, I used attention mechanisms, which let the model highlight
   
 PCA (Principal Component Analysis): Helps us see how well the classes (e.g., right hand vs tongue movement) separate in feature space.
   
+For future work, I’d like to try more powerful models on this dataset, such as Transformer-based models and Graph Neural Networks. These have shown great results in sequence and EEG-related tasks, so implementing them will help me deepen my knowledge.
+
+I also plan to work more on improving feature extraction and interpretability, so I can understand the brain signals better, not just classify them.
+
 
