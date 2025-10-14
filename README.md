@@ -1,5 +1,5 @@
 # EEG Motor Imagery Classification using Deep Learning #
-## Introduction ##
+## Introduction: ##
 
 This project explores how brain signals (EEG) can be used to recognize imagined movements like left hand, right hand, both feet, and tongue.
 The work is based on the BCI Competition IV, Dataset 2a, where participants wore an EEG cap with 22 electrodes to record brain activity.
@@ -13,7 +13,7 @@ EEG (Electroencephalography) is a way to record the brain’s electrical activit
 Think of it like tiny microphones placed on your head that “listen” to your brain’s signals.
 These signals look like waves, and different wave patterns represent different mental activities such as moving your hand, imagining a movement, or even sleeping.
 
-## Dataset ##
+## Dataset: ##
 
 The dataset used here is BCI Competition IV, Dataset 2a.
 
@@ -33,7 +33,7 @@ Tongue
 
 Epochs: Each recording is a 4-second clip of EEG data while the subject imagines a movement.
 
-## Models Used ##
+## Models Used: ##
 
 I experimented with several models and compared their performance:
 
@@ -49,7 +49,7 @@ CNN: Detects local patterns in the signals.
 
 This combination worked best because EEG data is both time-based (sequences) and spatial (channels across the scalp).
 
-## What I Did ##
+## What I Did: ##
 
 Loaded and prepared the dataset.
 
@@ -71,7 +71,7 @@ Trained multiple models and compared their results.
 
 Selected the Fast BiGRU + CNN model as the best performing.
 
-## Results ##
+## Results: ##
 
 Best Test Accuracy: 96.9%
 
@@ -81,7 +81,7 @@ Classification Report: High precision, recall, and F1 across all 4 classes.
 
 The model performed well after fine-tuning and using all training subjects.
 
-## Challenges ##
+## Challenges: ##
 
 EEG data is noisy and complex.
 
@@ -89,7 +89,7 @@ Preprocessing was difficult compared to image or text datasets.
 
 Model tuning required balancing underfitting and overfitting.
 
-## Future Work ##
+## Future Work: ##
 
 Try other advanced models with attention mechanisms.
 
@@ -97,7 +97,7 @@ Explore real-time EEG classification.
 
 Apply the model to more subjects and larger datasets.
 
-## Applications ##
+## Applications: ##
 
 This kind of EEG-based classification can be applied in:
 
@@ -111,7 +111,7 @@ Gaming and VR: Brain-controlled games.
 
 Human–Computer Interaction: Controlling devices without physical movement.
 
-## How to Run the Project
+## How to Run the Project:
 
 Clone this repository:
 
@@ -130,7 +130,7 @@ python train.py
 
 Evaluate the model and view results.
 
-## Conclusion
+## Conclusion:
 
 This project shows how deep learning and EEG data can be combined to classify imagined movements.
 The results highlight the potential of brain-computer interfaces for real-world applications in healthcare, accessibility, and human–machine interaction.
