@@ -11,7 +11,7 @@ The goal of this project is to build deep learning models that can predict which
 EEG (Electroencephalography) is a way to record the brain’s electrical activity using electrodes placed on the scalp.
 
 Think of it like tiny microphones placed on your head that “listen” to your brain’s signals.
-These signals look like waves, and different wave patterns represent different mental activities such as moving your hand, imagining a movement, or even sleeping.
+These signals resemble waves, and different wave patterns correspond to various mental activities, such as moving your hand, imagining a movement, or even sleeping.
 
 ## Dataset: ##
 
