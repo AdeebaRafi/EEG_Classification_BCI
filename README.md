@@ -23,11 +23,11 @@ Channels: 22 EEG electrodes
 
 Classes (4 movements):
 
-Left hand
+----> Left hand
 
-Right hand
+----> Right hand
 
-Both feet
+----> Both feet
 
 Tongue
 
@@ -37,9 +37,9 @@ Epochs: Each recording is a 4-second clip of EEG data while the subject imagines
 
 I experimented with several models and compared their performance:
 
-CNN + LSTM – A combination of convolutional and recurrent networks.
+CNN + LSTM: A combination of convolutional and recurrent networks.
 
-GRU Models – GRU (Gated Recurrent Unit) networks for sequence learning.
+GRU Models: GRU (Gated Recurrent Unit) networks for sequence learning.
 
 Fast BiGRU + CNN (Best Model)
 
