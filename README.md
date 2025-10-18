@@ -27,9 +27,9 @@ Classes (4 movements):
 
 ----> Right hand
 
-----> Both feet
+----> foot
 
-Tongue
+----> Tongue
 
 Epochs: Each recording is a 4-second clip of EEG data while the subject imagines a movement.
 
