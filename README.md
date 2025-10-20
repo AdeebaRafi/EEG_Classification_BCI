@@ -31,7 +31,7 @@ Classes (4 movements):
 
 ----> Tongue
 
-Epochs: Each recording is a 4-second clip of EEG data while the subject imagines a movement.
+Epochs: Each recording is a 4-second clip of EEG data while the subject imagines a movement
 
 ## Models Used: ##
 
@@ -109,7 +109,7 @@ Mental health: Neurofeedback for stress, ADHD, and focus.
 
 Gaming and VR: Brain-controlled games.
 
-Human–Computer Interaction: Controlling devices without physical movement.
+Human-Computer Interaction: Controlling devices without physical movement.
 
 ## How to Run the Project:
 
