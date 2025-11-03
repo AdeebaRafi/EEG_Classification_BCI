@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\geometry{margin=1in}
+
+
+\onehalfspacing
+
+\title{EEG Motor Imagery Classification using Deep Learning}
+\author{Adeeba Rafi}
+\date{12 October 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper explains EEG-based motor imagery classification using deep learning models such as CNN, LSTM, and GRU. The work aims to identify imagined movements from brain signals. The best result was achieved using a Fast BiGRU + CNN model with an accuracy of 96.9\%. Further experiments were conducted to test model robustness through ablation studies and data augmentation techniques such as Gaussian noise, impulse noise, channel dropout, mixup, and on-the-fly augmentation. These experiments helped understand how noise and variation affect performance.
+\end{abstract}
+
+\section{Introduction}
+EEG (Electroencephalography) records the brain’s electrical activity through electrodes placed on the scalp. Imagine small sensors listening to your brain waves. Each pattern of these waves shows a different activity, such as imagining moving your hand or tongue. This project uses deep learning to recognize these patterns and classify which movement the person is imagining.
+
+\section{Dataset}
+The dataset is from BCI Competition IV, Dataset 2a. It includes recordings from 22 electrodes placed on the scalp. Participants imagined four types of movements: left hand, right hand, both feet, and tongue. Each short recording is called an epoch, representing a small window of brain activity.
+
+\section{Model Architecture}
+The main model combines a Bidirectional GRU (Gated Recurrent Unit) and a CNN (Convolutional Neural Network). CNN extracts spatial features, identifying local wave patterns from the EEG signals. GRU captures the time-based information, helping the model understand how brain activity changes over time. By combining both, the model learns spatial and temporal features effectively, which improves classification accuracy.
+
+\section{Methodology}
+\begin{itemize}
+    \item Loaded and preprocessed EEG data (22 channels, 4 classes).
+    \item Normalized the signals and applied Fast Fourier Transform (FFT) to view frequency components.
+    \item Divided the data into small overlapping windows for training.
+    \item Visualized EEG signals, frequency plots, and model accuracy.
+    \item Trained multiple models including CNN+LSTM, GRU, and BiGRU+CNN.
+    \item Selected Fast BiGRU + CNN as the main model for its high accuracy (96.9\%).
+\end{itemize}
+
+\section{Ablation and Additional Experiments}
+After building the main model, several experiments were performed to test how the model behaves under different settings.
+
+\subsection*{Ablation Study}
+Different parts of the model were removed or replaced (like L1, L2 regularization, dropout rates, and GRU configurations) to see how each component affected accuracy. This helped identify which elements made the model stronger or weaker.
+
+\subsection*{Data Augmentation Experiments}
+Since EEG data can be noisy in real life, different noise types and data modifications were tested to see how robust the model is.
+
+\begin{itemize}
+    \item \textbf{Gaussian Noise:} Added small random fluctuations to signals, similar to light background noise. This made the model slightly stronger against signal variation.
+    \item \textbf{Impulse Noise:} Added sudden spikes, simulating sensor disturbances. The accuracy dropped slightly because such spikes are hard to interpret.
+    \item \textbf{Channel Dropout:} Randomly removed entire EEG channels to mimic electrode failure. The model performance dropped more compared to Gaussian noise.
+    \item \textbf{Mixup:} Combined two EEG samples into one with mixed labels. This helped the model generalize better, producing balanced accuracy.
+    \item \textbf{On-the-Fly Augmentation:} Random augmentations were applied during training so the model never saw exactly the same data twice. This made training harder but helped test robustness.
+\end{itemize}
+
+The results showed that the original Fast BiGRU + CNN model performed best in clean conditions, while models trained with controlled Gaussian noise remained more stable with slightly noisy data.
+
+\section{Results Summary}
+\begin{longtable}{|l|l|c|}
+\hline
+\textbf{Experiment} & \textbf{Description} & \textbf{Test Accuracy} \\
+\hline
+Baseline (Fast BiGRU + CNN) & Original model & 96.9\% \\
+\hline
+Gaussian + Time Shift & Added random smooth noise & 92.5\% \\
+\hline
+Impulse Noise & Added sudden spikes & 88.8\% \\
+\hline
+Channel Dropout & Removed random EEG channels & 78.0\% \\
+\hline
+Mixup & Mixed two samples & 81.7\% \\
+\hline
+On-the-Fly Augmentation & Random augmentations during training & 68.4\% \\
+\hline
+\end{longtable}
+
+These results show that while the baseline model performs best, noise-based augmentations can make the model more resistant to real-world variations.
+
+\subsection*{Model Accuracy Comparison Chart}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{eeg_model_accuracy.png}
+    \caption{EEG Model Accuracy Comparison (All Experiments). 
+    The Fast BiGRU + CNN model achieved the highest accuracy of 97.0\%, 
+    followed by Gaussian + Time Shift (92.5\%), Impulse Noise (88.8\%), 
+    Mixup (81.7\%), Channel Dropout (78.0\%), and On-the-Fly Noise (68.4\%).}
+    \label{fig:accuracy_comparison}
+\end{figure}
+
+\section{Challenges Faced}
+\begin{itemize}
+    \item Selecting the best model architecture while avoiding overfitting.
+    \item Managing noisy and complex EEG signals.
+    \item Training with limited data and maintaining balanced accuracy.
+    \item Understanding how different augmentations change the learning process.
+\end{itemize}
+
+\section{Future Work}
+\begin{itemize}
+    \item Add attention mechanisms to highlight which EEG channels are most important for each imagined movement.
+    \item Explore real-time EEG classification for brain-controlled devices.
+    \item Use more advanced data augmentation to improve performance on unseen or noisy data.
+    \item Test the system on larger, multi-subject datasets to improve generalization.
+\end{itemize}
+
+\section{Applications}
+\begin{itemize}
+    \item \textbf{Assistive Technology:} Control wheelchairs or prosthetic arms using brain signals.
+    \item \textbf{Medical Diagnosis:} Detect epilepsy, sleep disorders, and neurological diseases.
+    \item \textbf{Neurofeedback:} Help users manage stress, attention, and focus.
+    \item \textbf{Gaming and VR:} Enable control without physical movement.
+    \item \textbf{Human–Computer Interaction:} Use brain signals for direct device control.
+\end{itemize}
+
+\section{Conclusion}
+This project shows that deep learning models, especially the Fast BiGRU + CNN architecture, can classify motor imagery EEG data with high accuracy. Through ablation and augmentation experiments, the model’s strengths and weaknesses were better understood. While noise-based augmentations reduced accuracy slightly, they improved robustness. These findings suggest that combining spatial-temporal modeling with controlled data augmentation can build more reliable EEG decoding systems for real-world use.
+
+\section*{GitHub Repository}
+The complete code and dataset are available on GitHub:  
+\href{https://github.com/AdeebaRafi/EEG-Classification-BCI}
+
+\end{document}
