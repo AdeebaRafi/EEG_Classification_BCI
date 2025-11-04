@@ -1,4 +1,4 @@
-# EEG Motor Imagery Classification Using Deep Learning #
+# EEG Motor Imagery Classification Using Deep Learning: #
 ## Introduction: ##
 
 This project explores how brain signals (EEG) can be used to recognize imagined movements like left hand, right hand, both feet, and tongue.
